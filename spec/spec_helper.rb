@@ -1,6 +1,7 @@
 require 'view_board'
 require 'set_mark'
 require 'mark'
+require 'outcomes'
 
 RSpec.configure do |config|
  
