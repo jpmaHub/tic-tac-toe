@@ -1,11 +1,15 @@
 describe 'a game of Tic Tac Toe' do
   class InMemoryMarkGateway
+    def initialize
+      @mark_properties = []
+    end
+
     def mark_properties
       @mark_properties
     end
   
     def mark_properties=(mark_properties)
-      @mark_properties = mark_properties
+      @mark_properties.push(mark_properties)
     end
   end
 
@@ -30,5 +34,33 @@ describe 'a game of Tic Tac Toe' do
       [nil, nil, nil],
       [nil, nil, nil]
     ])
+  end
+
+  it 'can start a game with a different single mark on the board' do
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 9)
+    response = view_board.execute({})
+    board = response[:board]
+    
+    expect(board).to eq(    
+    [
+      [nil, nil, nil],
+      [nil, nil, nil],
+      [nil, nil, "O"]
+    ])
+  end
+
+  it 'can hold many marks on the board at once' do
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 1)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 2)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 3)
+    response = view_board.execute({})
+    board = response[:board]
+
+    expect(board).to eq(    
+      [
+        ['O', 'O', 'O'],
+        [nil, nil, nil],
+        [nil, nil, nil]
+      ])
   end
 end
