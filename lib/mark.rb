@@ -8,6 +8,10 @@ class Mark
     @type_of_mark
   end
 
+  def cell_number
+    @position_on_board
+  end
+
   def position_on_board
     return @position_on_board = [0,0] if @position_on_board == 1
     return @position_on_board = [0,1] if @position_on_board == 2
