@@ -88,6 +88,8 @@ class Outcomes
       'Human has won diagonally'
     elsif win_diagonal_O?
       'AI has won diagonally'
+    else
+      'Draw'
     end
   end
 end

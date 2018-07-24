@@ -109,4 +109,17 @@ describe 'a game of Tic Tac Toe' do
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 4)
     expect(outcomes.execute).to eq('AI has won horizontally')
   end
+
+  it 'Determines a Draw' do
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 1)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 2)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 3)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 4)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 5)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 6)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 7)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 8)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 9)
+    expect(outcomes.execute).to eq('Draw')
+  end
 end
