@@ -120,4 +120,20 @@ describe Outcomes do
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
     expect(outcomes.execute).to eq('AI has won diagonally')
   end
+
+  it 'determines draw' do
+    mark_gateway = double(mark_properties: [
+      Mark.new('X', 1),
+      Mark.new('O', 2),
+      Mark.new('X', 3),
+      Mark.new('X', 4),
+      Mark.new('O', 5),
+      Mark.new('O', 6),
+      Mark.new('O', 7),
+      Mark.new('X', 8),
+      Mark.new('X', 9)
+      ])
+    outcomes = Outcomes.new(mark_gateway: mark_gateway)
+    expect(outcomes.execute).to eq('Draw')
+  end
 end
