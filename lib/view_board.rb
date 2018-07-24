@@ -15,10 +15,8 @@ class ViewBoard
       x,y = @mark_gateway.mark_properties[index].position_on_board
       @board[x][y] = @mark_gateway.mark_properties[index].type_of_mark
     end
-      pp @board
-      { board: @board}
+      { board: @board }
   else
-    pp @board  
       { board: @board }
     end
   end

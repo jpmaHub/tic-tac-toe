@@ -2,6 +2,7 @@ require 'view_board'
 require 'set_mark'
 require 'mark'
 require 'outcomes'
+require 'file_mark_gateway'
 
 RSpec.configure do |config|
  

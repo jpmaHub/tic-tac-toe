@@ -13,7 +13,7 @@ describe 'a game of Tic Tac Toe' do
     end
   end
 
-  let(:mark_gateway) { InMemoryMarkGateway.new }
+  let(:mark_gateway) { FileMarkGateway.new }
 
   let(:view_board) do
     ViewBoard.new(mark_gateway: mark_gateway)

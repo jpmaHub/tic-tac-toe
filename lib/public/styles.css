@@ -1,0 +1,25 @@
+#header {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+#main {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+}
