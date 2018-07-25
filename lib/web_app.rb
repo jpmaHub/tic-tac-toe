@@ -21,18 +21,23 @@ class InMemoryMarkGateway
   end
 end
 
+post '/make-move' do
+  puts params
+  
+end
+
+
 
 get '/' do
   memory = FileMarkGateway.new
 
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: 'X', position_on_board: 1)
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: 'X', position_on_board: 2)
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: 'X', position_on_board: 3)
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: 'X', position_on_board: 4)
-
+  SetMark.new(mark_gateway: memory).execute(type_of_mark: "X" , position_on_board: 1)
+  SetMark.new(mark_gateway: memory).execute(type_of_mark: "O" , position_on_board: 2)
+  SetMark.new(mark_gateway: memory).execute(type_of_mark: "X" , position_on_board: 3)
+  
   response = ViewBoard.new(mark_gateway: memory).execute({})
   board = response[:board]
-  erb :board, locals: { board: board.to_s }
+  erb :board, locals: { board: board }
 end
 
 
