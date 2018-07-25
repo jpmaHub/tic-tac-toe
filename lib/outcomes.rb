@@ -1,5 +1,3 @@
-require 'set'
-
 class Outcomes
   def initialize(mark_gateway:)
     @mark_gateway = mark_gateway

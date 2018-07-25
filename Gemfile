@@ -4,7 +4,6 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-#gem "rails"
 gem 'sinatra', '~> 1.4', '>= 1.4.7'
 gem 'rspec'
 gem 'rubocop'

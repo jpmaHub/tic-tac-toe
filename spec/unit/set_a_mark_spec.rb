@@ -8,7 +8,7 @@ describe SetMark do
     mark_gateway = spy
     SetMark.new(mark_gateway: mark_gateway).execute(type_of_mark: 'O', position_on_board: 2)
 
-    expect(mark_gateway).to have_received(:mark_properties=) do |mark|
+    expect(mark_gateway).to have_received(:store_the_mark) do |mark|
       expect(mark.type_of_mark).to eq('O')
       expect(mark.position_on_board).to eq([0,1])
     end

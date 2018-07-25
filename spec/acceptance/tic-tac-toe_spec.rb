@@ -13,6 +13,8 @@ describe 'a game of Tic Tac Toe' do
     end
   end
 
+  before { FileMarkGateway.new.delete_all }
+
   let(:mark_gateway) { FileMarkGateway.new }
 
   let(:view_board) do
