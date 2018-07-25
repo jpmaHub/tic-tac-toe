@@ -72,19 +72,14 @@ class Outcomes
 
   def execute
     if win_horizontally_X?
-      p @array_of_X_positions
       'Human has won horizontally'
     elsif win_horizontally_O?
-      p @array_of_X_positions
       'AI has won horizontally'  
     elsif win_vertically_X?
-      p @array_of_X_positions
       'Human has won vertically'
     elsif win_vertically_O?
-      p @array_of_O_positions
       'AI has won vertically'
     elsif win_diagonal_X?
-      p @array_of_X_positions
       'Human has won diagonally'
     elsif win_diagonal_O?
       'AI has won diagonally'
