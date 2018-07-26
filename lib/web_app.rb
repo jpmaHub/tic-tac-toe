@@ -23,6 +23,8 @@ end
 
 post '/make-move' do
   puts params
+  memory = FileMarkGateway.new
+  SetMark.new(mark_gateway: memory).execute(type_of_mark: params[:mark], position_on_board: 3)
   
 end
 
@@ -30,11 +32,7 @@ end
 
 get '/' do
   memory = FileMarkGateway.new
-
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: "X" , position_on_board: 1)
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: "O" , position_on_board: 2)
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: "X" , position_on_board: 3)
-  
+  puts params
   response = ViewBoard.new(mark_gateway: memory).execute({})
   board = response[:board]
   erb :board, locals: { board: board }
