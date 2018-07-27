@@ -13,26 +13,21 @@
       <%= board %>
     </div>
 
-    <script>
-      function get_cell_index(x) {
-        alert(x.cellIndex + 1) ;
-        }
-    </script>
 
     <div class=board id=board>
       <table id=MyTable>
           <tr>
-              <td onclick="get_cell_index(this)" id=pos1>  <%= board[0][0] %> <form method="post" action="/make-move" > <input type="text" name="mark"/> </form> </td> 
-              <td onclick="get_cell_index(this)" id=pos2>  <%= board[0][1] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
-              <td onclick="get_cell_index(this)" id=pos3>  <%= board[0][2] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[0][0] %> <form method="post" action="/make-move/1" > <input type="text" name="mark"/> </form> </td> 
+              <td >  <%= board[0][1] %> <form method="post" action="/make-move/2"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[0][2] %> <form method="post" action="/make-move/3"> <input type="text" name="mark"/> </form> </td>
       
-              <td onclick="get_cell_index(this)" id=pos4>  <%= board[1][0] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
-              <td onclick="get_cell_index(this)" id=pos5>  <%= board[1][1] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
-              <td onclick="get_cell_index(this)" id=pos6>  <%= board[1][2] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[1][0] %> <form method="post" action="/make-move/4"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[1][1] %> <form method="post" action="/make-move/5"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[1][2] %> <form method="post" action="/make-move/6"> <input type="text" name="mark"/> </form> </td>
         
-              <td onclick="get_cell_index(this)" id=pos7>  <%= board[2][0] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
-              <td onclick="get_cell_index(this)" id=pos8>  <%= board[2][1] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
-              <td onclick="get_cell_index(this)" id=pos9>  <%= board[2][2] %> <form method="post" action="/make-move"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[2][0] %> <form method="post" action="/make-move/7"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[2][1] %> <form method="post" action="/make-move/8"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[2][2] %> <form method="post" action="/make-move/9"> <input type="text" name="mark"/> </form> </td>
           </tr>
       </table>
     </div>

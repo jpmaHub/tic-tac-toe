@@ -32,7 +32,7 @@ body {
 
 table {
   width: 500px;
-  height: 500px;
+  height: 300px;
   margin: 0 auto;
   border-collapse: collapse;
   border: 1px solid black;
@@ -48,5 +48,6 @@ td {
 
   #MyTable td:hover { 
     background-color: rgb(255, 171, 140);
+  
  }
 

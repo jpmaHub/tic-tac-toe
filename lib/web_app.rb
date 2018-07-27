@@ -21,11 +21,12 @@ class InMemoryMarkGateway
   end
 end
 
-post '/make-move' do
+post '/make-move/:id' do
   puts params
   memory = FileMarkGateway.new
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: params[:mark], position_on_board: 3)
+  SetMark.new(mark_gateway: memory).execute(type_of_mark: params[:mark], position_on_board: params[:id])
   
+  redirect '/'
 end
 
 
