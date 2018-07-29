@@ -35,7 +35,7 @@ describe FileMarkGateway do
     expect(gateway.mark_properties[1].cell_number).to eq(3)
   end
 
-  it 'returns one mark X from the array' do
+  it 'returns one mark from the array' do
     gateway = FileMarkGateway.new
     gateway.store_the_mark(Mark.new('X', 2))
     expect(gateway.mark_properties.length).to eq(1)

@@ -6,7 +6,7 @@ describe Outcomes do
       Mark.new('X', 3)
     ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won horizontally')
+    expect(outcomes.execute).to eq({status: 'Human has won horizontally'})
   end
 
   it 'determines a second type of horizontal win' do
@@ -16,7 +16,7 @@ describe Outcomes do
       Mark.new('X', 6)
     ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won horizontally')
+    expect(outcomes.execute).to eq({status: 'Human has won horizontally'})
   end
 
   it 'determines a third type of horizontal win' do
@@ -26,7 +26,7 @@ describe Outcomes do
       Mark.new('X', 9)
     ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won horizontally')
+    expect(outcomes.execute).to eq({status: 'Human has won horizontally'})
   end
 
   it 'determines a fourth type of horizontal win' do
@@ -36,7 +36,7 @@ describe Outcomes do
       Mark.new('X', 1)
     ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won horizontally')
+    expect(outcomes.execute).to eq({status: 'Human has won horizontally'})
   end
 
   it 'determines a vertical win' do
@@ -46,7 +46,7 @@ describe Outcomes do
       Mark.new('X', 7)
     ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won vertically')
+    expect(outcomes.execute).to eq({status: 'Human has won vertically'})
   end
 
   it 'determines a second vertical win' do
@@ -56,7 +56,7 @@ describe Outcomes do
       Mark.new('X', 7)
     ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won vertically')
+    expect(outcomes.execute).to eq({status: 'Human has won vertically'})
   end
 
   it 'determines a third vertical win' do
@@ -67,7 +67,7 @@ describe Outcomes do
       Mark.new('X', 1)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won vertically')
+    expect(outcomes.execute).to eq({status: 'Human has won vertically'})
   end
 
   it 'determines a diagonal win' do
@@ -77,7 +77,7 @@ describe Outcomes do
       Mark.new('X', 9)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won diagonally')
+    expect(outcomes.execute).to eq({status: 'Human has won diagonally'})
   end
 
   it 'determines a second diagonal win' do
@@ -87,7 +87,7 @@ describe Outcomes do
       Mark.new('X', 7)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won diagonally')
+    expect(outcomes.execute).to eq({status: 'Human has won diagonally'})
   end
 
 
@@ -98,7 +98,7 @@ describe Outcomes do
       Mark.new('X', 5)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Human has won diagonally')
+    expect(outcomes.execute).to eq({status: 'Human has won diagonally'})
   end
 
   it 'determines a vertical win for the AI' do
@@ -108,7 +108,7 @@ describe Outcomes do
       Mark.new('O', 8)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('AI has won vertically')
+    expect(outcomes.execute).to eq({status: 'AI has won vertically'})
   end
 
   it 'determines a random diagonal win for the AI' do
@@ -118,7 +118,7 @@ describe Outcomes do
       Mark.new('O', 5)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('AI has won diagonally')
+    expect(outcomes.execute).to eq({status: 'AI has won diagonally'})
   end
 
   it 'determines draw' do
@@ -134,6 +134,6 @@ describe Outcomes do
       Mark.new('X', 9)
       ])
     outcomes = Outcomes.new(mark_gateway: mark_gateway)
-    expect(outcomes.execute).to eq('Draw')
+    expect(outcomes.execute).to eq({status: 'Draw'})
   end
 end

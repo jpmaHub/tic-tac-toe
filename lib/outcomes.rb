@@ -70,19 +70,19 @@ class Outcomes
 
   def execute
     if win_horizontally_X?
-      'Human has won horizontally'
+      { status: 'Human has won horizontally' }
     elsif win_horizontally_O?
-      'AI has won horizontally'  
+      { status: 'AI has won horizontally' } 
     elsif win_vertically_X?
-      'Human has won vertically'
+      { status: 'Human has won vertically' }
     elsif win_vertically_O?
-      'AI has won vertically'
+      { status: 'AI has won vertically' }
     elsif win_diagonal_X?
-      'Human has won diagonally'
+      { status: 'Human has won diagonally' }
     elsif win_diagonal_O?
-      'AI has won diagonally'
+      { status: 'AI has won diagonally' }
     else
-      'Draw'
+      { status: 'Draw' }
     end
   end
 end
