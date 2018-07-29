@@ -4,8 +4,7 @@ class SetMark
   end
 
   def execute(type_of_mark:, position_on_board:)
-    @mark_gateway.mark_properties = Mark.new(type_of_mark, position_on_board)
+    @mark_gateway.store_the_mark(Mark.new(type_of_mark, position_on_board))
     {}
   end
-
 end

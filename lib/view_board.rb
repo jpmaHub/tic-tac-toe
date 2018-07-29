@@ -10,7 +10,6 @@ class ViewBoard
 
   def execute(*)
     if !@mark_gateway.mark_properties.nil?
-    
     (0...@mark_gateway.mark_properties.length).each do |index|  
       x,y = @mark_gateway.mark_properties[index].position_on_board
       @board[x][y] = @mark_gateway.mark_properties[index].type_of_mark
