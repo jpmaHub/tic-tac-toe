@@ -8,14 +8,16 @@ describe 'a game of Tic Tac Toe' do
       @mark_properties
     end
   
-    def mark_properties=(mark_properties)
+    def store_the_mark(mark_properties)
       @mark_properties.push(mark_properties)
     end
   end
 
   before { FileMarkGateway.new.delete_all }
 
-  let(:mark_gateway) { FileMarkGateway.new }
+  def mark_gateway
+    FileMarkGateway.new
+  end
 
   let(:view_board) do
     ViewBoard.new(mark_gateway: mark_gateway)
