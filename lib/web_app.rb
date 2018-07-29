@@ -6,35 +6,17 @@ require 'set_mark'
 require 'mark'
 require 'file_mark_gateway'
 
-class InMemoryMarkGateway
-  def initialize
-    @mark_properties = []
-    
-  end
-
-  def mark_properties
-    @mark_properties
-  end
-
-  def mark_properties=(mark_properties)
-    @mark_properties.push(mark_properties)
-  end
-end
-
 post '/make-move/:id' do
   puts params
-  memory = FileMarkGateway.new
-  SetMark.new(mark_gateway: memory).execute(type_of_mark: params[:mark], position_on_board: params[:id])
-  
+  gateway = FileMarkGateway.new
+  SetMark.new(mark_gateway: gateway).execute(type_of_mark: params[:mark], position_on_board: params[:id])
   redirect '/'
 end
 
-
-
 get '/' do
-  memory = FileMarkGateway.new
+  gateway = FileMarkGateway.new
   puts params
-  response = ViewBoard.new(mark_gateway: memory).execute({})
+  response = ViewBoard.new(mark_gateway: gateway).execute({})
   board = response[:board]
   erb :board, locals: { board: board }
 end
