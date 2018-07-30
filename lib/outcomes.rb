@@ -69,20 +69,21 @@ class Outcomes
   end
 
   def execute
-    if win_horizontally_X?
-      'Human has won horizontally'
-    elsif win_horizontally_O?
-      'AI has won horizontally'  
-    elsif win_vertically_X?
-      'Human has won vertically'
-    elsif win_vertically_O?
-      'AI has won vertically'
-    elsif win_diagonal_X?
-      'Human has won diagonally'
-    elsif win_diagonal_O?
-      'AI has won diagonally'
-    else
-      'Draw'
-    end
+    return { status: :HumanWon } if win_X? 
+    return { status: :AIWon } if win_O?
+    return { status: :Draw } if full_board?
+    { status: :IncompleteGame }
   end
+
+  def win_X?
+    win_horizontally_X? || win_vertically_X? || win_diagonal_X?
+  end 
+
+  def win_O?
+    win_horizontally_O? || win_vertically_O? || win_diagonal_O?
+  end
+
+  def full_board?
+    @mark_gateway.mark_properties.length == 9
+  end 
 end

@@ -10,33 +10,31 @@
     </div>
 
     <div id='main'>
-      <%= yield %>
-      <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+      <%= board %>
     </div>
 
-    <script>
-      var c=document.getElementById("myCanvas");
-      var ctx=c.getContext("2d");
 
-      ctx.rect(20,20,120,100);
-      ctx.rect(180,20,120,100);
-      ctx.rect(350,20,120,100);
-
-      ctx.rect(20,180,120,100); 
-      ctx.rect(180,180,120,100);
-      ctx.rect(350,180,120,100);
-
-      ctx.rect(20,350,120,100);
-      ctx.rect(180,350,120,100);
-      ctx.rect(350,350,120,100);
-
-      ctx.stroke();
-    </script>
-
-
+    <div class=board id=board>
+      <table id=MyTable>
+          <tr>
+              <td >  <%= board[0][0] %> <form method="post" action="/make-move/1" > <input type="text" name="mark"/> </form> </td> 
+              <td >  <%= board[0][1] %> <form method="post" action="/make-move/2"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[0][2] %> <form method="post" action="/make-move/3"> <input type="text" name="mark"/> </form> </td>
+      
+              <td >  <%= board[1][0] %> <form method="post" action="/make-move/4"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[1][1] %> <form method="post" action="/make-move/5"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[1][2] %> <form method="post" action="/make-move/6"> <input type="text" name="mark"/> </form> </td>
+        
+              <td >  <%= board[2][0] %> <form method="post" action="/make-move/7"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[2][1] %> <form method="post" action="/make-move/8"> <input type="text" name="mark"/> </form> </td>
+              <td >  <%= board[2][2] %> <form method="post" action="/make-move/9"> <input type="text" name="mark"/> </form> </td>
+          </tr>
+      </table>
+    </div>
 
   </body>
-    <footer id='footer'> 
+
+    <%# <footer id='footer'> 
     Developed by Rebecca and George
-    </footer>
+    </footer> %>
 </html>
