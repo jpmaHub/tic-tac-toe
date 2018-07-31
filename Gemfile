@@ -10,3 +10,4 @@ gem 'rubocop'
 gem 'pry'
 gem 'guard-rspec', require: false
 gem 'guard-rubocop'
+gem 'rack-test'

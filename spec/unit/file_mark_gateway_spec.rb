@@ -43,5 +43,6 @@ describe FileMarkGateway do
     gateway.mark_properties
     gateway.mark_properties
     expect(gateway.mark_properties.length).to eq(1)
+    FileMarkGateway.new.delete_all
   end
 end
