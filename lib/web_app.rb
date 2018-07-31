@@ -6,18 +6,16 @@ require 'set_mark'
 require 'mark'
 require 'file_mark_gateway'
 
-      post '/make-move/:id' do
-        puts params
-        gateway = FileMarkGateway.new
-        SetMark.new(mark_gateway: gateway).execute(type_of_mark: params[:mark], position_on_board: params[:id])
-        redirect '/'
-      end
-  
-      get '/' do
-        gateway = FileMarkGateway.new
-        puts params
-        response = ViewBoard.new(mark_gateway: gateway).execute({})
-        board = response[:board]
-        erb :board, locals: { board: board }
-      end
+post '/make-move/:id' do
+  gateway = FileMarkGateway.new
+  SetMark.new(mark_gateway: gateway).execute(type_of_mark: params[:mark], position_on_board: params[:id])
+  redirect '/'
+end
+
+get '/' do
+  gateway = FileMarkGateway.new
+  response = ViewBoard.new(mark_gateway: gateway).execute({})
+  board = response[:board]
+  erb :board, locals: { board: board }
+end
  
