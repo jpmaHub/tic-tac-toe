@@ -1,5 +1,5 @@
 describe ViewBoard do
-  def expect_view_board_respond_with(actual_marks , expected_board)
+  def expect_view_board_respond_with(actual_marks , expected_board) #  
     mark_gateway = double(mark_properties: actual_marks)
     view_board = ViewBoard.new(mark_gateway: mark_gateway)
     expect(view_board.execute).to eq(board: expected_board)

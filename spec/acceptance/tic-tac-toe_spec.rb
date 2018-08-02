@@ -1,7 +1,7 @@
 describe 'a game of Tic Tac Toe' do
   
   before { mark_gateway.delete_all }
-
+  after { mark_gateway.delete_all }
   def mark_gateway
     FileMarkGateway.new
   end
@@ -18,7 +18,7 @@ describe 'a game of Tic Tac Toe' do
     Outcomes.new(mark_gateway: mark_gateway)
   end
 
-  let(:AI_mark) do
+  let(:ai_mark) do
     AI.new(mark_gateway: mark_gateway)
   end
 
@@ -127,13 +127,17 @@ describe 'a game of Tic Tac Toe' do
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 6)
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 7)
     expect(outcomes.execute).to eq({status: :IncompleteGame})
-    FileMarkGateway.new.delete_all
   end
 
   it 'AI can place a mark' do
     set_a_mark.execute(type_of_mark: 'X', position_on_board: 1)
-    AI_mark = AI.new(mark_gateway: mark_gateway)
-    expect(AI_mark.execute).to eq(5)
-    FileMarkGateway.new.delete_all
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 2)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 3)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 4)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 5)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 7)
+    set_a_mark.execute(type_of_mark: 'O', position_on_board: 9)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 8)
+    expect(ai_mark.execute).to eq(6)
   end 
 end

@@ -4,37 +4,49 @@ class AI
     @mark_gateway = mark_gateway
     @depth = 0
     @outcome = Outcomes.new(mark_gateway: @mark_gateway)
+    @scores = {}
   end 
 
   def execute(*)
-      mark = @mark_gateway.mark_properties[0].cell_number
-      if mark == 1
-        5
-      else
-        9
-     end 
-     possible_game(2)
+    
+    minimax
   end
 
   def game_over?
     @outcome.win_O? || @outcome.win_X? || @outcome.full_board?
   end 
 
-  def minimax(game , depth)
-    return score if game_over?
+  def minimax
+    
     @depth += 1
-    possible_moves = []
-    scores = []
-
+     
     available_cells.each do |cell|
-      scores.push(minimax(possible_game(cell), @depth))
-      possible_moves.push(cell)
-    end 
+      possible_AI_move(cell)
+      if @outcome.win_O? 
+       @scores[cell] = score
+
+      elsif @outcome.win_X?
+        next
+        
+      else
+        available_cells.each do |cell|
+          possible_X_moves(cell)
+          minimax
+      end 
+      end
+      @mark_gateway.mark_properties.pop
+      @depth = 0
+    end
+    @scores.key(@scores.values.min)
 
   end
 
-  def possible_game(cell)
-    available_cells.delete(cell) 
+  def possible_AI_move(cell)
+    @mark_gateway.mark_properties.push(Mark.new('O', cell)) #
+  end 
+
+  def possible_X_moves(cell)
+    @mark_gateway.mark_properties.push(Mark.new('X', cell)) #
   end 
 
   def score
