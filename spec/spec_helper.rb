@@ -5,6 +5,7 @@ require 'outcomes'
 require 'file_mark_gateway'
 require 'web_app'
 require 'rack/test'
+require 'AI'
 
 RSpec.configure do |config|
 

@@ -1,18 +1,5 @@
 describe 'a game of Tic Tac Toe' do
-  class InMemoryMarkGateway
-    def initialize
-      @mark_properties = []
-    end
-
-    def mark_properties
-      @mark_properties
-    end
   
-    def store_the_mark(mark_properties)
-      @mark_properties.push(mark_properties)
-    end
-  end
-
   before { mark_gateway.delete_all }
 
   def mark_gateway
@@ -29,6 +16,10 @@ describe 'a game of Tic Tac Toe' do
 
   let(:outcomes) do
     Outcomes.new(mark_gateway: mark_gateway)
+  end
+
+  let(:AI_mark) do
+    AI.new(mark_gateway: mark_gateway)
   end
 
   it 'can start a game with a single mark on the board' do
@@ -136,5 +127,13 @@ describe 'a game of Tic Tac Toe' do
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 6)
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 7)
     expect(outcomes.execute).to eq({status: :IncompleteGame})
+    FileMarkGateway.new.delete_all
   end
+
+  it 'AI can place a mark' do
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 1)
+    AI_mark = AI.new(mark_gateway: mark_gateway)
+    expect(AI_mark.execute).to eq(5)
+    FileMarkGateway.new.delete_all
+  end 
 end
