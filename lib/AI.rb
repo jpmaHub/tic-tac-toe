@@ -8,8 +8,9 @@ class AI
   end 
 
   def execute(*)
-    
+
     minimax
+  
   end
 
   def game_over?
@@ -21,24 +22,33 @@ class AI
     @depth += 1
      
     available_cells.each do |cell|
+      # require 'pry-nav'; binding.pry
+      if @depth == 1
+        starting_cell = cell
+      end
       possible_AI_move(cell)
       if @outcome.win_O? 
-       @scores[cell] = score
-
-      elsif @outcome.win_X?
-        next
-        
+       @scores[starting_cell] = score 
+      
       else
         available_cells.each do |cell|
+          @depth += 1 #new - added by rebecca
           possible_X_moves(cell)
-          minimax
-      end 
+          if @outcome.win_X?
+             @scores[starting_cell] =  score
+             @mark_gateway.mark_properties.pop
+          else
+            minimax
+          end
+        end 
       end
       @mark_gateway.mark_properties.pop
       @depth = 0
     end
-    @scores.key(@scores.values.min)
+     @scores.key(@scores.values.max)
 
+     
+   
   end
 
   def possible_AI_move(cell)
@@ -58,6 +68,8 @@ class AI
       return 0
     end 
   end 
+
+
   
   def available_cells
     populated_cells = []
