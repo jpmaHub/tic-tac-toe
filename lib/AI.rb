@@ -5,13 +5,68 @@ class AI
     @depth = 0
     @outcome = Outcomes.new(mark_gateway: @mark_gateway)
     @scores = {}
+    @starting_cell =0
   end 
 
   def execute(*)
+    move
+  end 
 
-    minimax
-  
+  def move
+      #  require 'pry-nav'; binding.pry
+    @depth += 1
+
+    available_cells.each do |cell|
+      determine_next_player(cell)
+      if @depth == 1
+        @starting_cell = cell
+      end
+
+      if game_over?
+        # if @scores.include?(@starting_cell)
+        #   @scores[@starting_cell] += score
+        # else
+        @scores[@starting_cell] = score
+        # end
+        @mark_gateway.mark_properties.pop
+      else
+        move
+      end
+      # @scores[@starting_cell] -= @depth
+      @depth = 1
+      
+    end
+    @scores
   end
+
+  def determine_next_player(move)
+    if @mark_gateway.mark_properties[@mark_gateway.mark_properties.length - 1].type_of_mark == 'X'
+      o_turn(move)
+    else
+      x_turn(move)
+    end
+  end
+
+  def score
+    if @outcome.win_O?
+      return 10 - @depth
+    elsif @outcome.win_X?
+      return @depth - 10
+    else
+      return 0
+    end 
+  end 
+  
+   def x_turn(cell)
+    @mark_gateway.mark_properties.push(Mark.new('X', cell)) #
+   end 
+
+   def o_turn(cell)
+    @mark_gateway.mark_properties.push(Mark.new('O', cell)) #
+   end 
+
+  
+
 
   def game_over?
     @outcome.win_O? || @outcome.win_X? || @outcome.full_board?
@@ -59,15 +114,7 @@ class AI
     @mark_gateway.mark_properties.push(Mark.new('X', cell)) #
   end 
 
-  def score
-    if @outcome.win_O?
-      return 10 - @depth
-    elsif @outcome.win_X?
-      return @depth - 10
-    else
-      return 0
-    end 
-  end 
+ 
 
 
   
