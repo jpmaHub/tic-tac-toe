@@ -1,42 +1,72 @@
 require 'outcomes'
 class AI
+
+ 
+  
   def initialize(mark_gateway:)
     @mark_gateway = mark_gateway
     @depth = 0
     @outcome = Outcomes.new(mark_gateway: @mark_gateway)
     @scores = {}
+    @node_hash ={}
+    @counter =0
     @starting_cell =0
   end 
 
   def execute(*)
-    move
+    tree
   end 
 
-  def move
-      #  require 'pry-nav'; binding.pry
+
+  def tree
+    create_hash = Hash.new 
+
+    #require 'pry-nav'; binding.pry
     @depth += 1
 
     available_cells.each do |cell|
       determine_next_player(cell)
-      if @depth == 1
-        @starting_cell = cell
-      end
-
-      if game_over?
-        # if @scores.include?(@starting_cell)
-        #   @scores[@starting_cell] += score
-        # else
-        @scores[@starting_cell] = score
-        # end
-        @mark_gateway.mark_properties.pop
-      else
-        move
-      end
-      # @scores[@starting_cell] -= @depth
-      @depth = 1
-      
+        if @outcome.execute == { status: :IncompleteGame}
+        create_hash[cell] = node
+        elsif @outcome.execute == { status: :HumanWon }
+          create_hash[cell] = :win_X
+        elsif @outcome.execute == { status: :AIWon }
+          create_hash[cell] = :win_O
+          pp @mark_gateway.mark_properties
+        elsif @outcome.execute ==  { status: :Draw }
+          create_hash[cell] = :draw
+        end
+      @mark_gateway.mark_properties.pop
     end
-    @scores
+    
+    create_hash
+    
+  end
+
+
+  def node
+    node_hash = Hash.new 
+
+    available_cells.each do |cell|
+     determine_next_player(cell)
+     if @outcome.execute ==  { status: :IncompleteGame }
+
+      node_hash[@counter + 0.1]= node
+
+      elsif @outcome.execute == { status: :AIWon }
+        node_hash[@counter + 0.1] = :win_O
+      elsif @outcome.execute == { status: :HumanWon }
+        node_hash[@counter+ 0.1] = :win_X
+      elsif @outcome.execute ==  { status: :Draw }
+          node_hash[@counter+ 0.1] = :draw
+      end 
+       @mark_gateway.mark_properties.pop
+       @counter += 1
+       
+    end 
+    @node_hash = node_hash
+    @node_hash
+    
   end
 
   def determine_next_player(move)
@@ -66,8 +96,6 @@ class AI
    end 
 
   
-
-
   def game_over?
     @outcome.win_O? || @outcome.win_X? || @outcome.full_board?
   end 
@@ -113,10 +141,6 @@ class AI
   def possible_X_moves(cell)
     @mark_gateway.mark_properties.push(Mark.new('X', cell)) #
   end 
-
- 
-
-
   
   def available_cells
     populated_cells = []

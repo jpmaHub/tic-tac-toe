@@ -7,7 +7,7 @@ describe AI do
   end
 
   it 'can place a mark' do
-    expect_AI_mark_respond_with({6=>9, 8=>0} , [ Mark.new('X',1) ,
+    expect_AI_mark_respond_with({6=>:win_O, 8=>{0.1=>:draw}}, [ Mark.new('X',1) ,
                                       Mark.new('O',3),
                                       Mark.new('X',2),
                                       Mark.new('O',4),
@@ -18,7 +18,7 @@ describe AI do
   end
 
   it 'can place a mark different game' do
-    expect_AI_mark_respond_with({1=>9, 7=>9} , [ Mark.new('X',2),
+    expect_AI_mark_respond_with({1=>:win_O, 7=>:win_O} , [ Mark.new('X',2),
                                       Mark.new('O',3),
                                       Mark.new('X',4),
                                       Mark.new('O',5),
