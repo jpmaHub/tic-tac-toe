@@ -1,8 +1,9 @@
 describe AI do
   
   def expect_AI_mark_respond_with(expected_move, actual_marks)
+    tmp_gateway = double(mark_properties: [])
     mark_gateway = double(mark_properties: actual_marks)
-    ai_mark = AI.new(mark_gateway: mark_gateway)
+    ai_mark = AI.new(mark_gateway: mark_gateway , tmp_gateway: tmp_gateway) 
     expect(ai_mark.execute).to eq(expected_move)
   end
 
