@@ -6,12 +6,6 @@ describe 'a game of Tic Tac Toe' do
     FileMarkGateway.new
   end
 
-  # class TempMarkGateway
-  #   def mark_properties
-  #     []
-  #   end
-  # end
-
   def tmp_gateway
     TempMarkGateway.new
   end
@@ -29,7 +23,7 @@ describe 'a game of Tic Tac Toe' do
   end
 
   let(:ai_mark) do
-    AI.new(mark_gateway: mark_gateway ,tmp_gateway: tmp_gateway )
+    AI.new(mark_gateway: mark_gateway ,tmp_gateway: tmp_gateway)
   end
 
   it 'can start a game with a single mark on the board' do
