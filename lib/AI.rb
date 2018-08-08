@@ -1,56 +1,61 @@
 require 'outcomes'
+
 class AI
 
-  def initialize(mark_gateway: , tmp_gateway:)
+  def initialize(mark_gateway:, tmp_gateway:)
     @mark_gateway = mark_gateway
     @tmp_gateway = tmp_gateway
-    @outcome = Outcomes.new(mark_gateway: @tmp_gateway)
     @counter = 0
-    #@move = @tmp_gateway.mark_properties[@tmp_gateway.mark_properties.length - 1].type_of_mark 
   end 
+  
+  def outcome
+    Outcomes.new(mark_gateway: @tmp_gateway)
+  end
 
   def execute(*)
-    tree
+     tree
   end 
 
   def tree
     create_hash = Hash.new 
     populated_tmp
-    #require 'pry-nav'; binding.pry
     available_cells.each do |cell|
-      
+      # require 'pry-nav'; binding.pry
       populated_tmp
+      @counter = 0
       player = switch_player
       determine_next_move(player, cell)
-      if @outcome.execute == { status: :IncompleteGame}
+      if outcome.execute == { status: :IncompleteGame}
         create_hash[cell] = node
-      elsif @outcome.execute == { status: :HumanWon }
+        # binding.pry
+      elsif outcome.execute == { status: :HumanWon }
         create_hash[cell] = :win_X
-      elsif @outcome.execute == { status: :AIWon }
+      elsif outcome.execute == { status: :AIWon }
         create_hash[cell] = :win_O
-      elsif @outcome.execute ==  { status: :Draw }
+      elsif outcome.execute ==  { status: :Draw }
         create_hash[cell] = :draw
       end
     end
     create_hash 
   end
-
+  
   def node
     node_hash = Hash.new 
+    
     available_cells.each do |cell|
       player = switch_player
       determine_next_move(player, cell)
-      if @outcome.execute ==  { status: :IncompleteGame }
+      if outcome.execute ==  { status: :IncompleteGame }
       node_hash[@counter + 0.1]= node
-      elsif @outcome.execute == { status: :AIWon }
+      elsif outcome.execute == { status: :AIWon }
         node_hash[@counter + 0.1] = :win_O
-      elsif @outcome.execute == { status: :HumanWon }
-        node_hash[@counter+ 0.1] = :win_X
-      elsif @outcome.execute ==  { status: :Draw }
-          node_hash[@counter+ 0.1] = :draw
+      elsif outcome.execute == { status: :HumanWon }
+        node_hash[@counter + 0.1] = :win_X
+      elsif outcome.execute ==  { status: :Draw }
+          node_hash[@counter + 0.1] = :draw
       end
       @tmp_gateway.mark_properties.pop 
-      @counter += 1 
+      @counter += 1
     end 
     node_hash
   end
@@ -86,5 +91,4 @@ class AI
   end
   available_cells 
   end
-  
 end 

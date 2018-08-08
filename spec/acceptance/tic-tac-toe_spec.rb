@@ -6,6 +6,16 @@ describe 'a game of Tic Tac Toe' do
     FileMarkGateway.new
   end
 
+  # class TempMarkGateway
+  #   def mark_properties
+  #     []
+  #   end
+  # end
+
+  def tmp_gateway
+    TempMarkGateway.new
+  end
+
   let(:view_board) do
     ViewBoard.new(mark_gateway: mark_gateway)
   end
@@ -19,7 +29,7 @@ describe 'a game of Tic Tac Toe' do
   end
 
   let(:ai_mark) do
-    AI.new(mark_gateway: mark_gateway)
+    AI.new(mark_gateway: mark_gateway ,tmp_gateway: tmp_gateway )
   end
 
   it 'can start a game with a single mark on the board' do
@@ -129,15 +139,14 @@ describe 'a game of Tic Tac Toe' do
     expect(outcomes.execute).to eq({status: :IncompleteGame})
   end
 
-  xit 'AI can place a mark' do
+  xit 'AI can create tree' do
     set_a_mark.execute(type_of_mark: 'X', position_on_board: 1)
-    set_a_mark.execute(type_of_mark: 'X', position_on_board: 2)
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 3)
+    set_a_mark.execute(type_of_mark: 'X', position_on_board: 2)
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 4)
-    set_a_mark.execute(type_of_mark: 'X', position_on_board: 5)
     set_a_mark.execute(type_of_mark: 'X', position_on_board: 7)
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 9)
     set_a_mark.execute(type_of_mark: 'X', position_on_board: 8)
-    expect(ai_mark.execute).to eq(6)
+    expect(ai_mark.execute).to eq({5=>{0.1=>:draw}, 6=>:win_O})
   end 
 end
