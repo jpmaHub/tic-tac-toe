@@ -5,70 +5,65 @@ class AI
   def initialize(mark_gateway:, tmp_gateway:)
     @mark_gateway = mark_gateway
     @tmp_gateway = tmp_gateway
-    @counter = 0
   end 
   
   def outcome
     Outcomes.new(mark_gateway: @tmp_gateway)
   end
 
-  def execute(*)
+  def execute
      tree
   end 
 
   def tree
-    create_hash = Hash.new 
+    create_tree = {}
     populated_tmp
     available_cells.each do |cell|
-      # require 'pry-nav'; binding.pry
       populated_tmp
       @counter = 0
       player = switch_player
-      determine_next_move(player, cell)
-      if outcome.execute == { status: :IncompleteGame}
-        create_hash[cell] = node
-        # binding.pry
-      elsif outcome.execute == { status: :HumanWon }
-        create_hash[cell] = :win_X
-      elsif outcome.execute == { status: :AIWon }
-        create_hash[cell] = :win_O
-      elsif outcome.execute ==  { status: :Draw }
-        create_hash[cell] = :draw
-      end
+      place_next_move(player, cell)
+      assign_outcome(create_tree, cell)
     end
-    create_hash 
+    create_tree 
   end
-  
+
+  def assign_outcome(create, branch)
+    create[branch] = determine_outcome
+  end 
+
+  def determine_outcome
+    return node if outcome.execute == { status: :IncompleteGame}
+    return :win_X if outcome.execute == { status: :HumanWon }
+    return :win_O if outcome.execute == { status: :AIWon }
+    return :draw if outcome.execute ==  { status: :Draw }
+  end 
+
   def node
-    node_hash = Hash.new 
-    
-    available_cells.each do |cell|
+    create_node = {}
+    available_cells.each_with_index do |cell, index|
       player = switch_player
-      determine_next_move(player, cell)
-      if outcome.execute ==  { status: :IncompleteGame }
-      node_hash[@counter + 0.1]= node
-      elsif outcome.execute == { status: :AIWon }
-        node_hash[@counter + 0.1] = :win_O
-      elsif outcome.execute == { status: :HumanWon }
-        node_hash[@counter + 0.1] = :win_X
-      elsif outcome.execute ==  { status: :Draw }
-          node_hash[@counter + 0.1] = :draw
-      end
-      @tmp_gateway.mark_properties.pop 
-      @counter += 1
+      place_next_move(player, cell)
+      assign_outcome(create_node, index + 1)
+      undo_move
     end 
-    node_hash
+    create_node
   end
+
+  def undo_move
+    @tmp_gateway.mark_properties.pop 
+  end 
 
   def switch_player
-    if @tmp_gateway.mark_properties[@tmp_gateway.mark_properties.length - 1].type_of_mark == 'O'
-      'X'
-    else
-      'O'
-    end
+    return 'X' if check_last_mark == 'O'
+    'O'
   end
 
-  def determine_next_move(player, cell)
+  def check_last_mark
+    @tmp_gateway.mark_properties[@tmp_gateway.mark_properties.length - 1].type_of_mark
+  end 
+
+  def place_next_move(player, cell)
     @tmp_gateway.mark_properties.push(Mark.new(player, cell))
     @tmp_gateway.mark_properties
   end 

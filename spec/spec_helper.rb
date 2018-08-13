@@ -6,7 +6,7 @@ require 'file_mark_gateway'
 require 'web_app'
 require 'rack/test'
 require 'AI'
-require 'tmp_mark_gateway'
+
 
 RSpec.configure do |config|
 
