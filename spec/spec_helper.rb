@@ -5,6 +5,8 @@ require 'outcomes'
 require 'file_mark_gateway'
 require 'web_app'
 require 'rack/test'
+require 'AI'
+
 
 RSpec.configure do |config|
 
@@ -19,6 +21,7 @@ RSpec.configure do |config|
 
     mocks.verify_partial_doubles = true
   end
+  RSpec::Support::ObjectFormatter.default_instance.max_formatted_output_length = 10000
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
