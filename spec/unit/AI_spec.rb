@@ -3,11 +3,11 @@ describe AI do
   def expect_AI_mark_respond_with(expected_move, actual_marks)
     tmp_gateway = double(mark_properties: [])
     mark_gateway = double(mark_properties: actual_marks)
-    ai_mark = AI.new(mark_gateway: mark_gateway , tmp_gateway: tmp_gateway) 
+    ai_mark = AI.new(mark_gateway: mark_gateway, tmp_gateway: tmp_gateway) 
     expect(ai_mark.execute).to eq(expected_move)
   end
 
-  it 'can place a mark' do
+  xit 'can place a mark' do
     expect_AI_mark_respond_with({6=>:win_O, 8=>{0.1=>:draw}}, [ Mark.new('X',1) ,
                                       Mark.new('O',3),
                                       Mark.new('X',2),
@@ -18,18 +18,18 @@ describe AI do
                                       ])
   end
 
-  it 'can place a mark different game' do
+  xit 'can place a mark different game' do
     expect_AI_mark_respond_with({1=>:win_O, 7=>:win_O} , [ Mark.new('X',2),
                                       Mark.new('O',3),
                                       Mark.new('X',4),
                                       Mark.new('O',5),
                                       Mark.new('X',6),
                                       Mark.new('O',9),
-                                      Mark.new('X',8)           
+                                      Mark.new('X',8)
                                       ])
   end
 
-  it 'can place a different mark in game 3 ' do
+  xit 'can place a different mark in game 3 ' do
     expect_AI_mark_respond_with({4=>
     {0.1=>:win_X,
      1.1=>{1.1=>:win_O, 2.1=>:win_O},
@@ -66,7 +66,7 @@ describe AI do
                                            ])
   end
   
-  it 'can place a different mark when draw condition' do
+  xit 'can place a different mark when draw condition' do
     expect_AI_mark_respond_with({8=>{0.1=>:draw}, 9=>{0.1=>:draw}} , [Mark.new('X',1),
                                             Mark.new('X',2),
                                             Mark.new('O',3),

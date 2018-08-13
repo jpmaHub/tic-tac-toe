@@ -133,7 +133,7 @@ describe 'a game of Tic Tac Toe' do
     expect(outcomes.execute).to eq({status: :IncompleteGame})
   end
 
-  xit 'AI can create tree' do
+  it 'AI can create tree' do
     set_a_mark.execute(type_of_mark: 'X', position_on_board: 1)
     set_a_mark.execute(type_of_mark: 'O', position_on_board: 3)
     set_a_mark.execute(type_of_mark: 'X', position_on_board: 2)
